@@ -223,7 +223,9 @@ function Project() {
     if(message.includes('@ai')) setIsAiWriting(true)
   };
 
-  const handleCodeChange = (editor, data, value) => {
+  const handleCodeChange = (value) => {
+    if (!currentFile || !fileTree[currentFile]) return;
+    
     setFileTree((prevFileTree) => ({
       ...prevFileTree,
       [currentFile]: {
@@ -236,6 +238,21 @@ function Project() {
     }));
     setMarkdownContent(value);
   };
+
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  };
+  
+  // Then wrap your handleCodeChange:
+  const debouncedHandleCodeChange = debounce(handleCodeChange, 300);
+  
+
 
   const getFileExtension = (filename) => {
     const parts = filename.split(".");
@@ -567,9 +584,7 @@ function Project() {
   height="100%"
   theme={dracula}
   extensions={[getLanguageExtension(getFileExtension(currentFile))]}
-  onChange={(value, viewUpdate) => {
-    handleCodeChange(value);
-  }}
+  onChange={debouncedHandleCodeChange}
 />
               </div>
             </>
