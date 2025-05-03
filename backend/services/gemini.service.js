@@ -84,15 +84,7 @@ const model = genAI.getGenerativeModel({
    
     </example>
 
-<example>
 
-       user:who
-       response:{
-       "text":"Am Ancode created by Ankit"
-       }
-       
-       </example>
-    
     
        <example>
 
@@ -102,17 +94,8 @@ const model = genAI.getGenerativeModel({
        }
        
        </example>
-      
+    
  IMPORTANT : don't use file name like routes/index.js
- IMPORTANT : for non command query there should be only and only one field which is "text"
- IMPORTANT : for non command query always give response like the given example format  <example>
-
-       user:Hello 
-       response:{
-       "text":"Hello, How can I help you today?"
-       }
-       
-       </example>
        
        
     `
@@ -120,7 +103,8 @@ const model = genAI.getGenerativeModel({
 
 export const generateResult = async (prompt) => {
   try {
-    const result = await model.generateContent(prompt);
+      const result = await model.generateContent(prompt);
+      console.log("gemin")
     const response =  result.response;
 	  const text = response.text();
 	  

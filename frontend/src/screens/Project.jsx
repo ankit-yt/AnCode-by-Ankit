@@ -5,22 +5,25 @@ import { gsap } from "gsap";
 import axios from "../config/Axios";
 import { initalizeSocket, receiveMessage, sendMessage } from "../config/socket";
 import { UserDataContext } from "../context/UserContext";
-import {getWebContainer} from "../config/webContainer"
-import "highlight.js/styles/github.css"; // Light theme
+import { getWebContainer } from "../config/webContainer";
+
+import CodeMirror from "@uiw/react-codemirror";
+import { dracula } from "@uiw/codemirror-theme-dracula";
+import { materialLight } from "@uiw/codemirror-theme-material";
+import { javascript } from "@codemirror/lang-javascript";
+import { python } from "@codemirror/lang-python";
+import { xml } from "@codemirror/lang-xml";
+import { css } from "@codemirror/lang-css";
+
+import "highlight.js/styles/github.css"; // If you're still using highlight.js elsewhere
 import Message from "./Message";
-import { Controlled as CodeMirror } from "react-codemirror2";
-import "codemirror/lib/codemirror.css";
-import "codemirror/theme/material.css";
-import "codemirror/mode/javascript/javascript";
-import "codemirror/mode/python/python";
-import "codemirror/mode/xml/xml";
-import "codemirror/mode/css/css";
-import 'codemirror/theme/dracula.css';
+
 import Lottie from "lottie-react";
-import loader from '../../public/assests/loading.json';
-import aiTyping from "../../public/assests/aiTyping.json"
-import gradient from "../../public/assests/gradient.json"
-import { FaPlay, FaSave, FaExternalLinkAlt } from 'react-icons/fa';
+import loader from "../../public/assests/loading.json";
+import aiTyping from "../../public/assests/aiTyping.json";
+import gradient from "../../public/assests/gradient.json";
+
+import { FaPlay, FaSave, FaExternalLinkAlt } from "react-icons/fa";
 
 function Project() {
   const location = useLocation();
