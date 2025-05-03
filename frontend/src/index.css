@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cm-active-line-zoomed {
+	font-size: 1.1em; /* Adjust the zoom level as needed */
+	font-weight: bold; /* Optional: make it bold too */
+	background: rgba(0, 0, 0, 0.05); /* Optional: add a background highlight */
+  }
+
+  .CodeMirror {
+	height: 100vh !important;
+	font-size: 14px;
+	background-color: #1e1e1e;
+	word-wrap: break-word;
+	padding: 10px;
+	overflow: hidden ;
+  }
+  
+  .CodeMirror-scroll {
+  overflow: hidden !important;
+}
+
+.CodeMirror-scroll::-webkit-scrollbar {
+	width: 0px !important; 
+	height: 0px !important;
+  }
+  
+  
+  .CodeMirror-lines {
+	padding: 4px 0;
+  }
+  
+
+  .rounded-gradient-box {
+	word-break: break-word;
+	max-width: 52rem;
+	border-radius: 0.5rem;
+	padding: 0.75rem;
+	margin-top: 0.2rem;
+	font-size: 0.875rem;
+	color: black;
+	background: linear-gradient(to bottom right, #f8fafc, #e0e7ff, #f0fdf4);
+	position: relative;
+	z-index: 0;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Add a new layer behind for the gradient border */
+  .rounded-gradient-box::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	padding: 1px; /* Border thickness */
+	padding-left: 4px;
+	background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
+	-webkit-mask: 
+	  linear-gradient(#fff 0 0) content-box, 
+	  linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	z-index: -1;
+  }
+  
