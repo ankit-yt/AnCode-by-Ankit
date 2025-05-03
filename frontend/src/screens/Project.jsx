@@ -296,6 +296,26 @@ function Project() {
       setIsLoading(false);
     }
   };
+
+  const getLanguageExtension = (ext) => {
+    switch (ext) {
+      case "js":
+      case "jsx":
+      case "ts":
+      case "tsx":
+        return javascript();
+      case "py":
+        return python();
+      case "xml":
+      case "html":
+        return xml();
+      case "css":
+        return css();
+      default:
+        return [];
+    }
+  };
+  
   
   
 
@@ -542,20 +562,15 @@ function Project() {
               </div>
 
               <div className="flex-grow h-full break-words scrollbar-hide overflow-auto">
-                <CodeMirror
-                  value={MarkdownContent || ""}
-                  options={{
-                    mode:
-                      getCodeMirrorMode(getFileExtension(currentFile)) ||
-                      "null",
-                    theme: "dracula",
-                    lineNumbers: true,
-                    className: "h-full",
-                  }}
-                  onBeforeChange={(editor, data, value) => {
-                    handleCodeChange(editor, data, value);
-                  }}
-                />
+              <CodeMirror
+  value={MarkdownContent || ""}
+  height="100%"
+  theme={dracula}
+  extensions={[getLanguageExtension(getFileExtension(currentFile))]}
+  onChange={(value, viewUpdate) => {
+    handleCodeChange(value);
+  }}
+/>
               </div>
             </>
           ) : (
