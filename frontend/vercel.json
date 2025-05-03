@@ -1,7 +1,4 @@
 {
-	"rewrites": [
-	  { "source": "/(.*)", "destination": "/" }
-	],
 	"headers": [
 	  {
 		"source": "/(.*)",
@@ -10,6 +7,9 @@
 		  { "key": "Cross-Origin-Embedder-Policy", "value": "require-corp" }
 		]
 	  }
+	],
+	"rewrites": [
+	  { "source": "/(.*)", "destination": "/" }
 	]
   }
   
