@@ -3,7 +3,7 @@ import { UserDataContext } from "../context/UserContext";
 import axios from "../config/Axios";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Link, Users, XCircle , LogOut} from "lucide-react";
+import { Plus, Link, Users, XCircle , LogOut , Coffee} from "lucide-react";
 
 function Home() {
   const navigate = useNavigate();
@@ -123,11 +123,26 @@ function Home() {
       {/* Project Grid */}
       <section className="max-w-6xl mx-auto">
         <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">Your Projects</h2>
+        {!loading && projects?.length === 0 && (
+  <div className="max-w-6xl h-96 flex flex-col justify-center items-center text-center text-gray-400">
+    <div className="text-4xl mb-4">
+      <Coffee />
+    </div>
+    <h1 className="text-xl font-semibold mb-2">No Projects Found</h1>
+    <p className="text-sm mb-4">Looks like you haven't created any projects yet.</p>
+    <button onClick={() => setIsModalOpen(true)} className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+      Create Your First Project
+    </button>
+  </div>
+)}
+
         {loading ? (
           <p className="text-gray-500 dark:text-gray-300">Loading projects...</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <AnimatePresence>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+           
+              <AnimatePresence>
+                
               {projects.map((project) => (
                 <motion.div
                   key={project._id}

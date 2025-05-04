@@ -452,7 +452,9 @@ function Project() {
           <h2 className="text-xs text-gray-500 font-semibold mb-2 pl-1">
             EXPLORER
           </h2>
+          
           <div className="fileTree space-y-1">
+           
           {fileTree &&
   Object.keys(fileTree).map((file) => (
     <div className={`flex w-full rounded-md items-center ${

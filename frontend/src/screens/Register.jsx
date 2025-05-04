@@ -2,15 +2,19 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../config/Axios";
 import { UserDataContext } from "../context/UserContext";
+import Lottie from "lottie-react";
+import authLoading from "../../public/assests/authLoading.json"
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setUser } = useContext(UserDataContext);
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate();
 
   function submitHandler(e) {
+    setIsLoading(true)
     e.preventDefault();
     axios
       .post("/users/register", { email, password })
@@ -21,11 +25,18 @@ const Register = () => {
       })
       .catch((e) => {
         console.log(e.response?.data || "Registration failed");
+      }).finally(() => {
+        setIsLoading(false)
       });
   }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-50 to-white px-4">
+      {isLoading && (
+        <div className="loader w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-sm flex items-center justify-center">
+          <Lottie animationData={authLoading} loop={true} className="w-48 h-48" />
+        </div>
+      )}
       <div className="text-center mb-6">
         <h1 className="text-5xl font-black text-indigo-700 tracking-tight">Ancode</h1>
         <p className="text-gray-500 font-medium text-sm">Crafted by Ankit</p>
